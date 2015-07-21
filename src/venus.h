@@ -1,5 +1,5 @@
-#ifndef __COMMON_H
-#define __COMMON_H
+#ifndef __VENUS_H
+#define __VENUS_H
 
 #include <stdio.h>
 
