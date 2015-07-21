@@ -6,6 +6,7 @@
 
 #define NUMBER_OF_GPREGS   16
 #define DEFAULT_MEM_SIZE 4096
+#define STACK_TOP DEFAULT_MEM_SIZE-1
 
 typedef unsigned int       DWORD;
 typedef unsigned short int  WORD;
@@ -25,5 +26,8 @@ void set_ipreg_cell(CELL value);
 CELL get_ipreg_cell();
 void set_spreg_cell(CELL value);
 CELL get_spreg_cell();
+void init_stack();
+void stack_push(CELL value);
+CELL stack_pop();
 
 #endif
