@@ -2,6 +2,7 @@
 
 int main(int argc, char **argv)
 {
-	printf("hello, world\n");
+	init_vm();
+	free_vm();
 	return 0;
 } 
