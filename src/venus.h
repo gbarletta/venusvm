@@ -11,7 +11,12 @@
 
 #define op(A)	void A(CELL p1, CELL p2)
 
-#define OPC_MOV_RR	0 
+#define OPC_HLT_XX		0
+#define OPC_MOV_RR		1
+#define OPC_MOV_RM		2
+#define OPC_MOV_MR		3
+#define OPC_MOV_MM		4
+#define OPC_MOV_RI		5
 
 typedef unsigned int       DWORD;
 typedef unsigned short int  WORD;

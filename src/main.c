@@ -15,6 +15,8 @@ int main(int argc, char **argv)
 	printf("popped value: %x\n", popped_value);
 	printf("popped value 2: %x\n", popped_value2);
 	
+	run_opcode(OPC_HLT_XX, 0, 0);
+	
 	free_vm();
 	return 0;
 } 
