@@ -4,9 +4,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define NUMBER_OF_GPREGS   16
-#define DEFAULT_MEM_SIZE 4096
-#define STACK_TOP DEFAULT_MEM_SIZE-1
+#define NUMBER_OF_GPREGS   	16
+#define DEFAULT_MEM_SIZE 	4096
+#define STACK_TOP 			DEFAULT_MEM_SIZE-1
+#define MAX_OPCODES       	256
+
+#define op(A)	void A(CELL p1, CELL p2)
+
+#define OPC_MOV_RR	0 
 
 typedef unsigned int       DWORD;
 typedef unsigned short int  WORD;
@@ -29,5 +34,8 @@ CELL get_spreg_cell();
 void init_stack();
 void stack_push(CELL value);
 CELL stack_pop();
+void init_opcodes();
+void set_opcode(DWORD opcode, void (*instr)(CELL p1, CELL p2));
+void run_opcode(DWORD opcode, CELL p1, CELL p2);
 
 #endif
