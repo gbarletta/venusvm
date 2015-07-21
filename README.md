@@ -1,7 +1,7 @@
-# venusvm
+# VenusVM
 
-a simple and compact virtual machine
+A simple and compact virtual machine.
 
-# license
+# License
 
 MIT license. Please check `LICENSE` for more details.
