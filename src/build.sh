@@ -1,1 +1,1 @@
-gcc -Wall -pedantic -I. main.c vm.c memory.c -o venusvm 
+gcc -Wall -pedantic -I. main.c vm.c memory.c registers.c stack.c -o venusvm 

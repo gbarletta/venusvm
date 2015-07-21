@@ -1,12 +1,12 @@
 #include <venus.h>
 
-BYTE *memory;
+CELL *memory;
 DWORD current_size;
 
 void init_memory(DWORD memsz)
 {
 	int i;
-	memory = (BYTE *)malloc(memsz * sizeof(BYTE));
+	memory = (CELL *)malloc(memsz * sizeof(CELL));
 	
 	for(i = 0; i < memsz; i++) {
 		*(memory + i) = 0;
@@ -20,7 +20,7 @@ void free_memory()
 	free(memory);
 }
 	
-void set_memory_cell(DWORD addr, BYTE value) 
+void set_memory_cell(DWORD addr, CELL value) 
 {
 	if(addr >= current_size) {
 		printf("addr %x does not exists\n", addr);
@@ -30,7 +30,7 @@ void set_memory_cell(DWORD addr, BYTE value)
 	*(memory + addr) = value;
 }
 
-BYTE get_memory_cell(DWORD addr)
+CELL get_memory_cell(DWORD addr)
 {
 	if(addr >= current_size) {
 		printf("addr %x does not exists\n", addr);
