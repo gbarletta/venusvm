@@ -2,20 +2,11 @@
 
 int main(int argc, char **argv)
 {
-	CELL popped_value;
-	CELL popped_value2;
-	
 	init_vm();
 	
-	stack_push(0xCAFEBABE);
-	stack_push(0xBABECAFE);
-	popped_value = stack_pop();
-	popped_value2 = stack_pop();
+	run_vm();
 	
-	printf("popped value: %x\n", popped_value);
-	printf("popped value 2: %x\n", popped_value2);
-	
-	run_opcode(OPC_HLT_XX, 0, 0);
+	printf("%d\n", get_ipreg_cell());
 	
 	free_vm();
 	return 0;

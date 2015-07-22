@@ -8,20 +8,38 @@
 #define DEFAULT_MEM_SIZE 	4096
 #define STACK_TOP 			DEFAULT_MEM_SIZE-1
 #define MAX_OPCODES       	256
+#define CODE_START			0
 
-#define op(A)	void A(CELL p1, CELL p2)
+#define STATUS_HALT			0
+#define STATUS_RUNNING		1
 
-#define OPC_HLT_XX		0
-#define OPC_MOV_RR		1
-#define OPC_MOV_RM		2
-#define OPC_MOV_MR		3
-#define OPC_MOV_MM		4
-#define OPC_MOV_RI		5
+#define op(A)				void A(CELL p1, CELL p2)
 
 typedef unsigned int       DWORD;
 typedef unsigned short int  WORD;
 typedef unsigned char       BYTE;
 typedef 		 int        CELL;
+
+enum {
+	OPC_HLT_XX = 0,	
+	OPC_MOV_RR,
+	OPC_MOV_RM,		
+	OPC_MOV_MR,		
+	OPC_MOV_MM,		
+	OPC_MOV_RI,		
+	OPC_ADD_RR, 		
+	OPC_ADD_RI, 		
+	OPC_SUB_RR, 		
+	OPC_SUB_RI, 		
+	OPC_MUL_RR, 
+	OPC_MUL_RI,
+	OPC_DIV_RR,
+	OPC_DIV_RI,
+	OPC_AND_RR,
+	OPC_AND_RI,
+	OPC_JMP_RX,
+	OPC_JMP_IX
+};	
 
 void init_vm();
 void free_vm();
@@ -36,11 +54,15 @@ void set_ipreg_cell(CELL value);
 CELL get_ipreg_cell();
 void set_spreg_cell(CELL value);
 CELL get_spreg_cell();
+void set_running_status(CELL value);
+CELL get_running_status();
 void init_stack();
 void stack_push(CELL value);
 CELL stack_pop();
 void init_opcodes();
 void set_opcode(DWORD opcode, void (*instr)(CELL p1, CELL p2));
 void run_opcode(DWORD opcode, CELL p1, CELL p2);
+void init_exec();
+void run_vm();
 
 #endif

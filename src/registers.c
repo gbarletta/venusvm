@@ -3,6 +3,7 @@
 CELL gp_registers[NUMBER_OF_GPREGS];
 CELL ip_register;
 CELL sp_register;
+CELL running_status;
 
 void init_registers()
 {
@@ -51,4 +52,14 @@ CELL get_ipreg_cell()
 CELL get_spreg_cell()
 {
 	return sp_register;
+}
+
+void set_running_status(CELL value)
+{
+	running_status = value;
+}
+
+CELL get_running_status()
+{
+	return running_status;
 }
