@@ -1,14 +1,33 @@
 #include <venus.h>
 
+/*
+ * mov r0, #25
+ * cmp r0, #25
+ * je  $0
+ * hlt
+ */
+
 void simple_program() 
 {
+	/* mov r0, #25 */
 	set_memory_cell(0, OPC_MOV_RI);
-	set_memory_cell(1, 10);
-	set_memory_cell(2, 123);
+	set_memory_cell(1, 0);
+	set_memory_cell(2, 25);
 	
-	set_memory_cell(3, OPC_JMP_IX);
+	/* cmp r0, #25 */
+	set_memory_cell(3, OPC_CMP_RI);
 	set_memory_cell(4, 0);
-	set_memory_cell(5, 0);
+	set_memory_cell(5, 24);
+	
+	/* je $0 */
+	set_memory_cell(6, OPC_JE__IX);
+	set_memory_cell(7, 0);
+	set_memory_cell(8, 0);
+	
+	/* hlt */
+	set_memory_cell(9,  OPC_HLT_XX);
+	set_memory_cell(10, 0);
+	set_memory_cell(11, 0);
 }
 
 void init_vm()

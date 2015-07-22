@@ -125,6 +125,73 @@ op(JMP_IX)
 	set_ipreg_cell(p1);
 }
 
+op(CMP_RR)
+{
+	CELL reg_value1;
+	CELL reg_value2;
+	
+	reg_value1 = get_gpreg_cell(p1);
+	reg_value2 = get_gpreg_cell(p2);
+	
+	if(reg_value1 == reg_value2) {
+		set_flag(EQUAL);
+	}
+	
+	if(reg_value1 < reg_value2) {
+		set_flag(LESS);
+	}
+	
+	if(reg_value1 > reg_value2) {
+		set_flag(GREATER);
+	}
+	
+	if(reg_value1 == 0) {
+		set_flag(ZERO);
+	}
+}
+
+op(CMP_RI)
+{
+	CELL reg_value1;
+	CELL reg_value2;
+	
+	reg_value1 = get_gpreg_cell(p1);
+	reg_value2 = p2;
+	
+	if(reg_value1 == reg_value2) {
+		set_flag(EQUAL);
+	}
+	
+	if(reg_value1 < reg_value2) {
+		set_flag(LESS);
+	}
+	
+	if(reg_value1 > reg_value2) {
+		set_flag(GREATER);
+	}
+	
+	if(reg_value1 == 0) {
+		set_flag(ZERO);
+	}
+}
+
+op(JE__RX) 
+{
+	CELL reg_value;	
+	
+	if(get_flag(EQUAL)) {
+		reg_value = get_gpreg_cell(p1);
+		set_ipreg_cell(reg_value);
+	}
+}
+
+op(JE__IX) 
+{
+	if(get_flag(EQUAL)) {
+		set_ipreg_cell(p1);
+	}
+}
+
 void init_opcodes() 
 {
 	set_opcode(OPC_HLT_XX, HLT_XX);
@@ -143,6 +210,10 @@ void init_opcodes()
 	set_opcode(OPC_DIV_RI, DIV_RI);
 	set_opcode(OPC_JMP_RX, JMP_RX);
 	set_opcode(OPC_JMP_IX, JMP_IX);
+	set_opcode(OPC_CMP_RR, CMP_RR);
+	set_opcode(OPC_CMP_RI, CMP_RI);
+	set_opcode(OPC_JE__RX, JE__RX);
+	set_opcode(OPC_JE__IX, JE__IX);
 }
 
 void set_opcode(DWORD opcode, void (*instr)(CELL p1, CELL p2))

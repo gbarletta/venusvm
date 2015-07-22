@@ -4,6 +4,7 @@ CELL gp_registers[NUMBER_OF_GPREGS];
 CELL ip_register;
 CELL sp_register;
 CELL running_status;
+bool flags[FLAGS_SIZE];
 
 void init_registers()
 {
@@ -11,6 +12,10 @@ void init_registers()
 	
 	for(i = 0; i < NUMBER_OF_GPREGS; i++) {
 		gp_registers[i] = 0;
+	}
+	
+	for(i = 0; i < FLAGS_SIZE; i++) {
+		clr_flag(i);
 	}
 }
 
@@ -62,4 +67,19 @@ void set_running_status(CELL value)
 CELL get_running_status()
 {
 	return running_status;
+}
+
+void set_flag(DWORD flag)
+{
+	flags[flag] = true;
+}
+
+void clr_flag(DWORD flag)
+{
+	flags[flag] = false;
+}
+
+bool get_flag(DWORD flag)
+{
+	return flags[flag];
 }

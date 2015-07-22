@@ -3,12 +3,14 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #define NUMBER_OF_GPREGS   	16
 #define DEFAULT_MEM_SIZE 	4096
 #define STACK_TOP 			DEFAULT_MEM_SIZE-1
 #define MAX_OPCODES       	256
 #define CODE_START			0
+#define FLAGS_SIZE			32
 
 #define STATUS_HALT			0
 #define STATUS_RUNNING		1
@@ -19,6 +21,12 @@ typedef unsigned int       DWORD;
 typedef unsigned short int  WORD;
 typedef unsigned char       BYTE;
 typedef 		 int        CELL;
+
+
+/* OPC_OPCODE_DESTSRC 
+ * 
+ * X = nothing, R = register, M = memory addr, I = immediate 
+*/
 
 enum {
 	OPC_HLT_XX = 0,	
@@ -38,8 +46,19 @@ enum {
 	OPC_AND_RR,
 	OPC_AND_RI,
 	OPC_JMP_RX,
-	OPC_JMP_IX
+	OPC_JMP_IX,
+	OPC_CMP_RR,
+	OPC_CMP_RI,
+	OPC_JE__RX,
+	OPC_JE__IX
 };	
+
+enum {
+	ZERO = 0,
+	EQUAL,
+	GREATER,
+	LESS
+};
 
 void init_vm();
 void free_vm();
@@ -56,6 +75,9 @@ void set_spreg_cell(CELL value);
 CELL get_spreg_cell();
 void set_running_status(CELL value);
 CELL get_running_status();
+void set_flag(DWORD flag);
+void clr_flag(DWORD flag);
+bool get_flag(DWORD flag);
 void init_stack();
 void stack_push(CELL value);
 CELL stack_pop();
