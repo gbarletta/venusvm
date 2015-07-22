@@ -191,6 +191,109 @@ op(JE__IX)
 		set_ipreg_cell(p1);
 	}
 }
+	
+op(JG__RX)
+{
+	CELL reg_value;
+	
+	if(get_flag(GREATER)) {
+		reg_value = get_gpreg_cell(p1);
+		set_ipreg_cell(reg_value);
+	}
+}
+
+op(JG__IX)
+{
+	if(get_flag(GREATER)) {
+		set_ipreg_cell(p1);
+	}
+}
+
+op(JL__RX)
+{
+	CELL reg_value;
+	
+	if(get_flag(LESS)) {
+		reg_value = get_gpreg_cell(p1);
+		set_ipreg_cell(reg_value);
+	}
+}
+
+op(JL__IX)
+{
+	if(get_flag(LESS)) {
+		set_ipreg_cell(p1);
+	}
+}
+
+op(JGE_RX)
+{
+	CELL reg_value;
+	
+	if(get_flag(GREATER) || get_flag(EQUAL)) {
+		reg_value = get_gpreg_cell(p1);
+		set_ipreg_cell(reg_value);
+	}
+}
+
+op(JGE_IX)
+{
+	if(get_flag(GREATER) || get_flag(EQUAL)) {
+		set_ipreg_cell(p1);
+	}
+}
+
+
+op(JLE_RX)
+{
+	CELL reg_value;
+	
+	if(get_flag(LESS) || get_flag(EQUAL)) {
+		reg_value = get_gpreg_cell(p1);
+		set_ipreg_cell(reg_value);
+	}
+}
+
+op(JLE_IX)
+{
+	if(get_flag(LESS) || get_flag(EQUAL)) {
+		set_ipreg_cell(p1);
+	}
+}
+
+op(JNE_RX)
+{
+	CELL reg_value;
+	
+	if(!get_flag(EQUAL)) {
+		reg_value = get_gpreg_cell(p1);
+		set_ipreg_cell(reg_value);
+	}
+}
+
+op(JNE_IX)
+{
+	if(!get_flag(EQUAL)) {
+		set_ipreg_cell(p1);
+	}
+}
+
+op(JZ__RX)
+{
+	CELL reg_value;
+	
+	if(get_flag(ZERO)) {
+		reg_value = get_gpreg_cell(p1);
+		set_ipreg_cell(reg_value);
+	}
+}
+
+op(JZ__IX)
+{
+	if(get_flag(ZERO)) {
+		set_ipreg_cell(p1);
+	}
+}
 
 void init_opcodes() 
 {
@@ -214,6 +317,18 @@ void init_opcodes()
 	set_opcode(OPC_CMP_RI, CMP_RI);
 	set_opcode(OPC_JE__RX, JE__RX);
 	set_opcode(OPC_JE__IX, JE__IX);
+	set_opcode(OPC_JG__RX, JG__RX);
+	set_opcode(OPC_JG__IX, JG__IX);
+	set_opcode(OPC_JL__RX, JL__RX);
+	set_opcode(OPC_JL__IX, JL__IX);
+	set_opcode(OPC_JGE_RX, JGE_RX);
+	set_opcode(OPC_JGE_IX, JGE_IX);
+	set_opcode(OPC_JLE_RX, JLE_RX);
+	set_opcode(OPC_JLE_IX, JLE_IX);
+	set_opcode(OPC_JNE_RX, JNE_RX);
+	set_opcode(OPC_JNE_IX, JNE_IX);
+	set_opcode(OPC_JZ__RX, JZ__RX);
+	set_opcode(OPC_JZ__IX, JZ__IX);
 }
 
 void set_opcode(DWORD opcode, void (*instr)(CELL p1, CELL p2))

@@ -50,7 +50,19 @@ enum {
 	OPC_CMP_RR,
 	OPC_CMP_RI,
 	OPC_JE__RX,
-	OPC_JE__IX
+	OPC_JE__IX,
+	OPC_JG__RX,
+	OPC_JG__IX,
+	OPC_JL__RX,
+	OPC_JL__IX,
+	OPC_JGE_RX,
+	OPC_JGE_IX,
+	OPC_JLE_RX,
+	OPC_JLE_IX,
+	OPC_JNE_RX,
+	OPC_JNE_IX,
+	OPC_JZ__RX,
+	OPC_JZ__IX
 };	
 
 enum {
