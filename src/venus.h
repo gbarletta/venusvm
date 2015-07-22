@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 
 #define NUMBER_OF_GPREGS   	16
 #define DEFAULT_MEM_SIZE 	4096
@@ -11,11 +12,20 @@
 #define MAX_OPCODES       	256
 #define CODE_START			0
 #define FLAGS_SIZE			32
+#define DEFAULT_SYM_NUM		256
+#define RET_REGISTER		15
 
 #define STATUS_HALT			0
 #define STATUS_RUNNING		1
 
+#define SYM_TYPE_FUNC		0
+#define SYM_TYPE_VAR		1
+
+#define SYM_NOT_FOUND		0
+#define SYM_FOUND			1
+
 #define op(A)				void A(CELL p1, CELL p2)
+
 
 typedef unsigned int       DWORD;
 typedef unsigned short int  WORD;
@@ -25,7 +35,7 @@ typedef 		 int        CELL;
 
 /* OPC_OPCODE_DESTSRC 
  * 
- * X = nothing, R = register, M = memory addr, I = immediate 
+ * X = nothing, R = register, M = memory addr, I = immediate, S = symbol 
 */
 
 enum {
@@ -62,7 +72,11 @@ enum {
 	OPC_JNE_RX,
 	OPC_JNE_IX,
 	OPC_JZ__RX,
-	OPC_JZ__IX
+	OPC_JZ__IX,
+	OPC_CALL_R,
+	OPC_CALL_I,
+	OPC_CALL_S,
+	OPC_RET_XX
 };	
 
 enum {
@@ -71,6 +85,14 @@ enum {
 	GREATER,
 	LESS
 };
+
+struct SYM {
+	char  sym_name[32];
+	DWORD sym_addr;
+	BYTE  sym_type;
+};
+
+typedef struct SYM symbol;
 
 void init_vm();
 void free_vm();
@@ -98,5 +120,8 @@ void set_opcode(DWORD opcode, void (*instr)(CELL p1, CELL p2));
 void run_opcode(DWORD opcode, CELL p1, CELL p2);
 void init_exec();
 void run_vm();
+void init_symbols(DWORD symsz);
+void add_sym(char *sym_name, CELL sym_addr, BYTE sym_type);
+DWORD get_sym(char *sym_name, CELL *sym_addr, BYTE *sym_type);
 
 #endif

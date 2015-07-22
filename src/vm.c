@@ -33,10 +33,11 @@ void simple_program()
 void init_vm()
 {
 	init_memory(DEFAULT_MEM_SIZE);
+	init_symbols(DEFAULT_SYM_NUM);
 	init_registers();
 	init_stack();
 	init_opcodes();
-	init_exec();
+	init_exec();	
 	simple_program();
 }
 

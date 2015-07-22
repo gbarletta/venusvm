@@ -99,7 +99,7 @@ op(DIV_RR)
 	reg_value = get_gpreg_cell(p1);
 	
 	set_gpreg_cell(p1, reg_value / get_gpreg_cell(p2));
-	set_gpreg_cell(15, reg_value % get_gpreg_cell(p2));
+	set_gpreg_cell(14, reg_value % get_gpreg_cell(p2));
 }
 
 op(DIV_RI)
@@ -108,7 +108,7 @@ op(DIV_RI)
 	reg_value = get_gpreg_cell(p1);
 	
 	set_gpreg_cell(p1, reg_value / p2);
-	set_gpreg_cell(15, reg_value % p2);
+	set_gpreg_cell(14, reg_value % p2);
 }
 
 op(JMP_RX)
@@ -294,6 +294,26 @@ op(JZ__IX)
 		set_ipreg_cell(p1);
 	}
 }
+	
+op(CALL_R)
+{
+	CELL reg_value;
+	reg_value = get_gpreg_cell(p1);
+	
+	set_gpreg_cell(RET_REGISTER, get_ipreg_cell());
+	set_ipreg_cell(reg_value);
+}
+
+op(CALL_I)
+{
+	set_gpreg_cell(RET_REGISTER, get_ipreg_cell());
+	set_ipreg_cell(p1);
+}
+
+op(RET_XX)
+{
+	set_ipreg_cell(get_gpreg_cell(RET_REGISTER));
+}	
 
 void init_opcodes() 
 {
@@ -329,6 +349,9 @@ void init_opcodes()
 	set_opcode(OPC_JNE_IX, JNE_IX);
 	set_opcode(OPC_JZ__RX, JZ__RX);
 	set_opcode(OPC_JZ__IX, JZ__IX);
+	set_opcode(OPC_CALL_R, CALL_R);
+	set_opcode(OPC_CALL_I, CALL_I);
+	set_opcode(OPC_RET_XX, RET_XX);
 }
 
 void set_opcode(DWORD opcode, void (*instr)(CELL p1, CELL p2))
