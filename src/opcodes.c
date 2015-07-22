@@ -315,6 +315,21 @@ op(RET_XX)
 	set_ipreg_cell(get_gpreg_cell(RET_REGISTER));
 }	
 
+op(GET_II)
+{
+	set_gpreg_cell(DEV_REGISTER, device_get(p1, p2));
+}
+
+op(SET_II)
+{
+	device_set(p1, p2, get_gpreg_cell(DEV_REGISTER));
+}
+
+op(RUN_II)
+{
+	device_exec(p1, p2);
+}
+
 void init_opcodes() 
 {
 	set_opcode(OPC_HLT_XX, HLT_XX);
@@ -352,6 +367,9 @@ void init_opcodes()
 	set_opcode(OPC_CALL_R, CALL_R);
 	set_opcode(OPC_CALL_I, CALL_I);
 	set_opcode(OPC_RET_XX, RET_XX);
+	set_opcode(OPC_GET_II, GET_II);
+	set_opcode(OPC_SET_II, SET_II);
+	set_opcode(OPC_RUN_II, RUN_II);
 }
 
 void set_opcode(DWORD opcode, void (*instr)(CELL p1, CELL p2))

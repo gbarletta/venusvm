@@ -10,12 +10,12 @@
 void simple_program() 
 {
 	/* mov r0, #25 */
-	set_memory_cell(0, OPC_MOV_RI);
-	set_memory_cell(1, 0);
-	set_memory_cell(2, 25);
+	set_memory_cell(0, 65);
+	set_memory_cell(1, 66);
+	set_memory_cell(2, 67);
 	
 	/* cmp r0, #25 */
-	set_memory_cell(3, OPC_CMP_RI);
+	set_memory_cell(3, 68);
 	set_memory_cell(4, 0);
 	set_memory_cell(5, 24);
 	
@@ -28,12 +28,32 @@ void simple_program()
 	set_memory_cell(9,  OPC_HLT_XX);
 	set_memory_cell(10, 0);
 	set_memory_cell(11, 0);
+	
 }
+
+/*
+	set_memory_cell(0, OPC_MOV_RI);
+	set_memory_cell(1, 0);
+	set_memory_cell(2, 25);
+	
+	set_memory_cell(3, OPC_CMP_RI);
+	set_memory_cell(4, 0);
+	set_memory_cell(5, 24);
+
+	set_memory_cell(6, OPC_JE__IX);
+	set_memory_cell(7, 0);
+	set_memory_cell(8, 0);
+	
+
+	set_memory_cell(9,  OPC_HLT_XX);
+	set_memory_cell(10, 0);
+	set_memory_cell(11, 0); */
 
 void init_vm()
 {
 	init_memory(DEFAULT_MEM_SIZE);
 	init_symbols(DEFAULT_SYM_NUM);
+	init_devices(DEFAULT_DEV_NUM);
 	init_registers();
 	init_stack();
 	init_opcodes();
@@ -71,4 +91,5 @@ void run_vm()
 void free_vm()
 {
 	free_memory();
+	free_devices();
 }

@@ -39,3 +39,8 @@ CELL get_memory_cell(DWORD addr)
 	
 	return *(memory + addr);
 }
+
+CELL *get_cell_physaddr(DWORD cell_addr)
+{
+	return memory + cell_addr;
+}
