@@ -1,7 +1,7 @@
 # VenusVM
 
-A simple and compact virtual machine. 
-Please don't be rude, I was 17 when I wrote this :)
+A simple virtual machine project. 
+Please don't make fun of the code, I wrote it when I was 17 haha:)
 
 # License
 
